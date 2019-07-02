@@ -32,6 +32,11 @@ class Artist
       self.new(name).tap {|new_Artist_obj| new_Artist_obj.save}
    end
 
+   def genres
+      self.songs.map {|song| song.genre}.uniq
+   end
+   
+
    #Class Methods
    def self.all
       @@all

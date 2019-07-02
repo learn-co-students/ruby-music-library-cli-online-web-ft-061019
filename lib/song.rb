@@ -55,4 +55,16 @@ class Song
       self.all.clear
    end
 
+   #creates an individual song instance from a filename 
+   def self.new_from_filename(filename)
+      artist, song_name, genre = filename.split(" - ")
+      self.new(song_name).tap do |new_song|
+         new_song.artist = Artist.find_or_create_by_name(artist)
+         new_song.genre = Genre.find_or_create_by_name(genre.gsub(".mp3", ""))
+      end
+   end
+
+   def self.create_from_filename(filename)
+      self.new_from_filename(filename).tap {|song| song.save}
+   end
 end
