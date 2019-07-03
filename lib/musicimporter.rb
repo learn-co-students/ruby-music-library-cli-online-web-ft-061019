@@ -11,7 +11,11 @@ class MusicImporter
         files.collect do |filename|
             filename.gsub("#{path}/", "")
         end
-
     end
 
+    def import
+        files.each do |file|
+            Song.create_from_filename(file)
+        end
+    end
 end
